@@ -1,0 +1,180 @@
+/* ==================================================================
+ *  Çoklu Dil (i18n) Sistemi – PROJEYE ÖZEL STİLLER
+ *  cilginyazilim.com
+ * ------------------------------------------------------------------
+ *  EN ÖNEMLİ BÖLÜM AŞAĞIDAKİ "RTL" KISMIDIR.
+ * ================================================================== */
+
+/* --- Kurulum / uyarı notu --- */
+.cy-setup-note {
+    display: flex;
+    gap: .6rem;
+    align-items: flex-start;
+    padding: .85rem 1rem;
+    border: 1px solid var(--cy-warning, #f59e0b);
+    border-radius: var(--cy-radius-sm);
+    background: var(--cy-warning-soft, rgba(245, 158, 11, .12));
+    font-size: .875rem;
+    line-height: 1.6;
+}
+
+.cy-setup-note .cy-icon { color: var(--cy-warning, #f59e0b); flex: none; margin-top: .15rem; }
+.cy-setup-note code { overflow-wrap: anywhere; }
+
+/* --- Kod blokları --- */
+.cy-code {
+    display: block;
+    padding: .75rem .85rem;
+    margin: 0;
+    border-radius: var(--cy-radius-sm);
+    background: var(--cy-surface-soft);
+    font-size: .8125rem;
+    line-height: 1.6;
+    white-space: pre;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+
+    /* Kod her zaman SOLDAN SAĞA okunur — arayüz Arapça olsa bile.
+       Bunu belirtmezsek RTL sayfada kod satırları ters görünür. */
+    direction: ltr;
+    text-align: left;
+}
+
+/* ==================================================================
+ *  DİL SEÇİCİ
+ * ================================================================== */
+
+.cy-langswitch__button {
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+}
+
+.cy-langswitch .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+}
+
+.cy-langswitch .dropdown-item.is-active { font-weight: 600; color: var(--cy-primary); }
+
+.cy-langswitch__code {
+    display: inline-grid;
+    place-items: center;
+    min-width: 1.9rem;
+    padding: .1rem .3rem;
+    border-radius: var(--cy-radius-sm);
+    background: var(--cy-surface-soft);
+    font-size: .6875rem;
+    font-weight: 700;
+    letter-spacing: .05em;
+}
+
+/* ==================================================================
+ *  DİL ÖRNEKLERİ SAYFASI
+ * ================================================================== */
+
+.cy-i18n-current {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.cy-i18n-current__name { margin: .2rem 0 0; font-size: 1.5rem; font-weight: 700; }
+.cy-i18n-current__tags { display: flex; gap: .35rem; flex-wrap: wrap; }
+
+.cy-i18n-result {
+    padding: .7rem .85rem;
+    border-radius: var(--cy-radius-sm);
+    background: var(--cy-surface-soft);
+    font-size: 1.0625rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Karşılaştırma tablolarında hücreler dar kalmasın. */
+.cy-i18n-table td, .cy-i18n-table th { white-space: nowrap; }
+
+/* --- Yön gösterimi --- */
+.cy-i18n-dirdemo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: .85rem;
+}
+
+.cy-i18n-dirdemo__box {
+    padding: .85rem 1rem;
+    border: 1px solid var(--cy-border);
+    border-radius: var(--cy-radius-sm);
+    background: var(--cy-surface-soft);
+}
+
+.cy-i18n-dirdemo__box p { margin: .5rem 0 0; font-size: .9375rem; line-height: 1.7; }
+
+/* ==================================================================
+ *  RTL (SAĞDAN SOLA) DESTEĞİ
+ * ------------------------------------------------------------------
+ *  TEMEL KURAL: Yeni bir arayüz yazarken YÖNE BAĞLI ÖZELLİKLERİ
+ *  kullanmayın.
+ *
+ *      margin-left        →  margin-inline-start
+ *      padding-right      →  padding-inline-end
+ *      left / right       →  inset-inline-start / inset-inline-end
+ *      text-align: left   →  text-align: start
+ *      border-left        →  border-inline-start
+ *
+ *  "inline-start", LTR'de sol, RTL'de sağ demektir; tarayıcı
+ *  aynalamayı kendisi yapar ve tek bir CSS iki yönde de çalışır.
+ *
+ *  Aşağıdaki kurallar, ortak iskeletteki yöne bağlı yazılmış eski
+ *  tanımları RTL'de düzeltir. Sıfırdan yazılan bir projede bu bölüme
+ *  hiç ihtiyaç olmaz — doğrudan mantıksal özelliklerle başlarsınız.
+ * ================================================================== */
+
+[dir="rtl"] {
+    /* Sol menü sağa geçer; içerik alanı da ona göre kayar. */
+}
+
+[dir="rtl"] .cy-sidebar {
+    left: auto;
+    right: 0;
+    border-right: 0;
+    border-left: 1px solid var(--cy-border);
+}
+
+[dir="rtl"] .cy-main { margin-left: 0; margin-right: var(--cy-sidebar-w); }
+[dir="rtl"] body.is-collapsed .cy-main { margin-right: var(--cy-sidebar-w-collapsed); margin-left: 0; }
+
+/* Çekmece dar ekranda SAĞDAN girer. */
+@media (max-width: 991.98px) {
+    [dir="rtl"] .cy-main { margin-right: 0; }
+    [dir="rtl"] .cy-sidebar { transform: translateX(100%); }
+    [dir="rtl"] body.is-sidebar-open .cy-sidebar { transform: translateX(0); }
+}
+
+/* Oklar aynalanır: "sonraki" sayfa RTL'de SOLDADIR. */
+[dir="rtl"] .cy-pager__link .cy-icon { transform: rotate(180deg); }
+[dir="rtl"] .cy-pager__prev { transform: rotate(0deg); }
+
+/* Tablo ve metin hizası. */
+[dir="rtl"] .cy-table > thead > tr > th,
+[dir="rtl"] .cy-table > tbody > tr > td { text-align: right; }
+[dir="rtl"] .text-end { text-align: left !important; }
+
+/* Açılır menü ters köşeye yaslanır. */
+[dir="rtl"] .dropdown-menu-end { --bs-position: start; }
+
+/* Sohbet/liste ikonları ve etiketler arasındaki boşluk. */
+[dir="rtl"] .cy-setup-note .cy-icon { margin-left: 0; }
+
+/* Kod ve teknik metinler ters dönmez (yukarıdaki .cy-code kuralı). */
+[dir="rtl"] code, [dir="rtl"] pre { direction: ltr; text-align: left; unicode-bidi: embed; }
+
+/* Giriş ekranındaki dil seçici sağ üst köşede durur. */
+.cy-auth__lang {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: .5rem;
+}
