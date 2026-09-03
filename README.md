@@ -16,7 +16,7 @@
 
 **🇹🇷 Türkçe** · [🇬🇧 English](README.en.md)
 
-[**▶ Canlı Demo**](https://cilginyazilim.com/kutuphane/uygulama/PHP-MySQL-Coklu-Dil-i18n-Cogul-Kurallari-RTL-Panel-main/) · [Kaynak Kütüphanesi](https://cilginyazilim.com/kutuphane/php-multi-language-i18n) · [cilginyazilim.com](https://cilginyazilim.com)
+[**▶ Canlı Demo**](https://cilginyazilim.com/kutuphane/uygulama/multi-language-system/) · [Kaynak Kütüphanesi](https://cilginyazilim.com/kutuphane/php-multi-language-i18n) · [cilginyazilim.com](https://cilginyazilim.com)
 
 </div>
 
@@ -28,13 +28,13 @@
 
 **Kurulum yok, kayıt yok, indirme yok — tarayıcınızdan 3 saniyede deneyin.**
 
-<a href="https://cilginyazilim.com/kutuphane/uygulama/PHP-MySQL-Coklu-Dil-i18n-Cogul-Kurallari-RTL-Panel-main/"><img src="https://img.shields.io/badge/CANLI_DEMOYU_A%C3%87-0b5cb5?style=for-the-badge&logo=googlechrome&logoColor=white&labelColor=061321" alt="Canlı Demoyu Aç" height="42"></a>
+<a href="https://cilginyazilim.com/kutuphane/uygulama/multi-language-system/"><img src="https://img.shields.io/badge/CANLI_DEMOYU_A%C3%87-0b5cb5?style=for-the-badge&logo=googlechrome&logoColor=white&labelColor=061321" alt="Canlı Demoyu Aç" height="42"></a>
 <a href="https://cilginyazilim.com/kutuphane/php-multi-language-i18n"><img src="https://img.shields.io/badge/KAYNAK_KODU_%C4%B0NCELE-0ea5e9?style=for-the-badge&logo=readthedocs&logoColor=white&labelColor=061321" alt="Kaynak Kodu İncele" height="42"></a>
-<a href="https://github.com/CilginYazilim/PHP-MySQL-Coklu-Dil-i18n-Cogul-Kurallari-RTL-Panel/archive/refs/heads/main.zip"><img src="https://img.shields.io/badge/ZIP_%C4%B0ND%C4%B0R-16a34a?style=for-the-badge&logo=github&logoColor=white&labelColor=061321" alt="ZIP İndir" height="42"></a>
+<a href="https://github.com/CilginYazilim/multi-language-system/archive/refs/heads/main.zip"><img src="https://img.shields.io/badge/ZIP_%C4%B0ND%C4%B0R-16a34a?style=for-the-badge&logo=github&logoColor=white&labelColor=061321" alt="ZIP İndir" height="42"></a>
 
 <br><br>
 
-<a href="https://cilginyazilim.com/kutuphane/uygulama/PHP-MySQL-Coklu-Dil-i18n-Cogul-Kurallari-RTL-Panel-main/" title="Canlı demoyu açmak için tıklayın">
+<a href="https://cilginyazilim.com/kutuphane/uygulama/multi-language-system/" title="Canlı demoyu açmak için tıklayın">
   <img src="docs/screenshots/03-dil-ornekleri.png" alt="Çoklu dil sistemi canlı demo önizlemesi" width="860">
 </a>
 
@@ -143,22 +143,47 @@ Bu proje, **[Çılgın Yazılım Kütüphanesi](https://cilginyazilim.com/kutuph
 
 ## Ekran Görüntüleri
 
-| Giriş | Kontrol Paneli |
-|---|---|
-| <img src="docs/screenshots/01-giris.png" width="420" alt="Giriş ekranı"> | <img src="docs/screenshots/02-kontrol-paneli.png" width="420" alt="Kontrol paneli"> |
+### Dil örnekleri
 
-| Dil Örnekleri | Arapça (RTL) |
-|---|---|
-| <img src="docs/screenshots/03-dil-ornekleri.png" width="420" alt="Dil örnekleri sayfası"> | <img src="docs/screenshots/04-arapca-rtl.png" width="420" alt="Arapça sağdan sola görünüm"> |
+Projenin konusu bu sayfada toplanır. Çoğul kuralları tablosunda `0, 1, 2, 5, 11, 100` sayılarının üç dildeki karşılıkları yan yana durur: Türkçe tek biçim, İngilizce iki, Arapça **altı** biçim kullanır. Altında yer tutuculu cümleler, sayı/tarih/para biçimleri ve göreli zaman aynı ekranda görülür — hepsini `intl` üretir, hiçbirini `if` üretmez.
 
-| Kullanıcılar | Koyu Tema |
-|---|---|
-| <img src="docs/screenshots/05-kullanicilar.png" width="420" alt="Kullanıcı listesi"> | <img src="docs/screenshots/06-koyu-tema.png" width="420" alt="Koyu tema"> |
+![Dil örnekleri: çoğul kuralları, yer tutucular ve yerelleştirilmiş sayı, tarih, para biçimleri](docs/screenshots/03-dil-ornekleri.png)
 
-<div align="center">
-<img src="docs/screenshots/07-mobil.png" width="300" alt="Mobil görünüm">
-<br><sub>390px genişlikte mobil görünüm — yatay kaydırma yok</sub>
-</div>
+### Arapça (RTL)
+
+Dil seçicisinden `AR` seçildiğinde bütün düzen **aynalanır**: kenar çubuğu sağa geçer, metin sağa yaslanır, tablo sütunları ters sıraya döner. Ayrı bir "RTL sürümü" CSS dosyası yoktur; arayüz mantıksal özelliklerle (`margin-inline-start`, `padding-inline`) yazıldığı için `dir="rtl"` tek başına yetiyor.
+
+![Arapça sağdan sola görünüm: kenar çubuğu sağda, metin sağa yaslı, sütunlar ters sırada](docs/screenshots/04-arapca-rtl.png)
+
+### Kullanıcılar
+
+Sunucu taraflı sayfalama ve filtreleme. Arama kutusu ile açılır listeler **"Uygula"ya basmadan** çalışır: listeler anında, arama kutusu 450 ms yazma beklemesiyle. Filtre ve sayfa numarası adres çubuğunda taşındığı için bağlantı paylaşılabilir, geri tuşu ve yenileme aynı sonucu verir.
+
+![Kullanıcı listesi: canlı çalışan arama ve durum filtresi, sunucu taraflı sayfalama](docs/screenshots/05-kullanicilar.png)
+
+### Kontrol paneli
+
+Sayaç şeridi ve dil katmanının özeti. Kullanıcının dil tercihi tarayıcıda değil **hesabında** durur; koyu tema tercihiyle birlikte cihazdan cihaza taşınır.
+
+![Kontrol paneli: sayaç şeridi ve dil katmanının özeti](docs/screenshots/02-kontrol-paneli.png)
+
+### Giriş ekranı
+
+Demo hesapları tek tıkla doldurulur. Giriş denemeleri hız sınırına tabidir; art arda başarısız denemeden sonra hesap geçici olarak kilitlenir. Giriş ekranında seçilen dil, girişten sonra hesaba **taşınır**.
+
+![Giriş ekranı: demo hesapları tek tıkla doldurulur](docs/screenshots/01-giris.png)
+
+### Koyu tema
+
+Tema tarayıcıda değil kullanıcı hesabında saklanır. Tablo hücrelerinin kontrastı koyu temada da ölçülüdür (14,5:1).
+
+![Koyu tema görünümü](docs/screenshots/06-koyu-tema.png)
+
+### Mobil görünüm
+
+390px genişlikte kenar çubuğu alt navigasyona dönüşür. Sayfa gövdesinde yatay kaydırma yoktur; geniş tablolar yalnızca kendi kapsayıcılarında kayar.
+
+<img src="docs/screenshots/07-mobil.png" alt="390px genişlikte mobil görünüm" width="360">
 
 ---
 
@@ -290,6 +315,7 @@ Bunun yerine `Translator` her yerelleştirme çağrısında eklentinin varlığ�
 - Açık / koyu tema, hesaba kayıtlı
 - Sunucu tarafında sayfalama ve arama
 - Mobilde alt navigasyon, yatay kaydırma yok
+- Kullanıcılar sayfasında canlı filtre (JS kapalıysa da çalışır)
 - Sıfır bağımlılık: Composer yok, npm yok, CDN yok
 
 </td></tr>
@@ -519,8 +545,8 @@ Sütunun neden `ENUM` olduğunu ve ödünleşimini
 **1 · Dosyaları yerleştirin**
 
 ```bash
-git clone https://github.com/CilginYazilim/PHP-MySQL-Coklu-Dil-i18n-Cogul-Kurallari-RTL-Panel.git
-cd PHP-MySQL-Coklu-Dil-i18n-Cogul-Kurallari-RTL-Panel
+git clone https://github.com/CilginYazilim/multi-language-system.git
+cd multi-language-system
 ```
 
 **2 · Veritabanını içe aktarın**
@@ -659,11 +685,11 @@ multi-language-system/
 │   ├── dashboard/index.php
 │   ├── i18n/index.php         ★ Dil örnekleri sayfası
 │   ├── users/index.php
-│   └── errors/                403 · 404 · 500
+│   └── errors/                404 · 500
 │
 ├── assets/
 │   ├── css/  cilginyazilim.css (marka) · admin.css · feature.css · bootstrap.min.css
-│   └── js/   app.js · lang.js · login.js · jquery · bootstrap
+│   └── js/   app.js · lang.js · login.js · users.js · jquery · bootstrap
 │
 ├── config/config.php          Tek merkez ayarlar
 ├── routes/web.php             Rota tanımları
@@ -846,7 +872,7 @@ Bu bilerek seçilmiştir. Boş metin dönseydi eksik çeviri **sessizce** kaybol
 
 ## Katkı
 
-Hata bildirimi ve öneriler için [issue açabilirsiniz](https://github.com/CilginYazilim/PHP-MySQL-Coklu-Dil-i18n-Cogul-Kurallari-RTL-Panel/issues). Yeni dil çevirisi gönderirseniz memnun oluruz — anahtar denkliğini koruyun ve çoğul kalıplarında o dilin kendi kategorilerini kullanın.
+Hata bildirimi ve öneriler için [issue açabilirsiniz](https://github.com/CilginYazilim/multi-language-system/issues). Yeni dil çevirisi gönderirseniz memnun oluruz — anahtar denkliğini koruyun ve çoğul kalıplarında o dilin kendi kategorilerini kullanın.
 
 ## Lisans
 

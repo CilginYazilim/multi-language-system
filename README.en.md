@@ -16,7 +16,7 @@
 
 [🇹🇷 Türkçe](README.md) · **🇬🇧 English**
 
-[**▶ Live Demo**](https://cilginyazilim.com/kutuphane/uygulama/PHP-MySQL-Coklu-Dil-i18n-Cogul-Kurallari-RTL-Panel-main/) · [Code Library](https://cilginyazilim.com/kutuphane/php-multi-language-i18n) · [cilginyazilim.com](https://cilginyazilim.com)
+[**▶ Live Demo**](https://cilginyazilim.com/kutuphane/uygulama/multi-language-system/) · [Code Library](https://cilginyazilim.com/kutuphane/php-multi-language-i18n) · [cilginyazilim.com](https://cilginyazilim.com)
 
 </div>
 
@@ -28,13 +28,13 @@
 
 **No setup, no sign-up, no download — try it in your browser in 3 seconds.**
 
-<a href="https://cilginyazilim.com/kutuphane/uygulama/PHP-MySQL-Coklu-Dil-i18n-Cogul-Kurallari-RTL-Panel-main/"><img src="https://img.shields.io/badge/OPEN_LIVE_DEMO-0b5cb5?style=for-the-badge&logo=googlechrome&logoColor=white&labelColor=061321" alt="Open Live Demo" height="42"></a>
+<a href="https://cilginyazilim.com/kutuphane/uygulama/multi-language-system/"><img src="https://img.shields.io/badge/OPEN_LIVE_DEMO-0b5cb5?style=for-the-badge&logo=googlechrome&logoColor=white&labelColor=061321" alt="Open Live Demo" height="42"></a>
 <a href="https://cilginyazilim.com/kutuphane/php-multi-language-i18n"><img src="https://img.shields.io/badge/BROWSE_SOURCE-0ea5e9?style=for-the-badge&logo=readthedocs&logoColor=white&labelColor=061321" alt="Browse Source" height="42"></a>
-<a href="https://github.com/CilginYazilim/PHP-MySQL-Coklu-Dil-i18n-Cogul-Kurallari-RTL-Panel/archive/refs/heads/main.zip"><img src="https://img.shields.io/badge/DOWNLOAD_ZIP-16a34a?style=for-the-badge&logo=github&logoColor=white&labelColor=061321" alt="Download ZIP" height="42"></a>
+<a href="https://github.com/CilginYazilim/multi-language-system/archive/refs/heads/main.zip"><img src="https://img.shields.io/badge/DOWNLOAD_ZIP-16a34a?style=for-the-badge&logo=github&logoColor=white&labelColor=061321" alt="Download ZIP" height="42"></a>
 
 <br><br>
 
-<a href="https://cilginyazilim.com/kutuphane/uygulama/PHP-MySQL-Coklu-Dil-i18n-Cogul-Kurallari-RTL-Panel-main/" title="Click to open the live demo">
+<a href="https://cilginyazilim.com/kutuphane/uygulama/multi-language-system/" title="Click to open the live demo">
   <img src="docs/screenshots/03-dil-ornekleri.png" alt="Multi-language system live demo preview" width="860">
 </a>
 
@@ -143,22 +143,47 @@ This project is one of the documented, production-ready examples published in th
 
 ## Screenshots
 
-| Login | Dashboard |
-|---|---|
-| <img src="docs/screenshots/01-giris.png" width="420" alt="Login screen"> | <img src="docs/screenshots/02-kontrol-paneli.png" width="420" alt="Dashboard"> |
+### Language examples
 
-| Language Examples | Arabic (RTL) |
-|---|---|
-| <img src="docs/screenshots/03-dil-ornekleri.png" width="420" alt="Language examples page"> | <img src="docs/screenshots/04-arapca-rtl.png" width="420" alt="Arabic right-to-left layout"> |
+This page is the point of the project. The plural-rules table puts `0, 1, 2, 5, 11, 100` side by side in three languages: Turkish uses one form, English two, Arabic **six**. Below it, placeholder sentences, number/date/currency formats and relative time appear on the same screen — all produced by `intl`, none of them by an `if`.
 
-| Users | Dark Theme |
-|---|---|
-| <img src="docs/screenshots/05-kullanicilar.png" width="420" alt="User list"> | <img src="docs/screenshots/06-koyu-tema.png" width="420" alt="Dark theme"> |
+![Language examples: plural rules, placeholders and localized number, date and currency formats](docs/screenshots/03-dil-ornekleri.png)
 
-<div align="center">
-<img src="docs/screenshots/07-mobil.png" width="300" alt="Mobile view">
-<br><sub>Mobile view at 390px — no horizontal scrolling</sub>
-</div>
+### Arabic (RTL)
+
+Picking `AR` in the language switcher **mirrors** the whole layout: the sidebar moves right, text aligns right, table columns reverse. There is no separate "RTL stylesheet"; the UI is written with logical properties (`margin-inline-start`, `padding-inline`), so `dir="rtl"` alone is enough.
+
+![Arabic right-to-left layout: sidebar on the right, right-aligned text, reversed columns](docs/screenshots/04-arapca-rtl.png)
+
+### Users
+
+Server-side pagination and filtering. The search box and the dropdowns work **without pressing "Apply"**: dropdowns instantly, the search box after a 450 ms typing pause. Filter and page number travel in the address bar, so the link is shareable and both the back button and a refresh return the same result.
+
+![User list: live search and status filter, server-side pagination](docs/screenshots/05-kullanicilar.png)
+
+### Dashboard
+
+The counter strip and a summary of the i18n layer. A user's language preference lives in their **account**, not the browser; it travels across devices together with the theme preference.
+
+![Dashboard: counter strip and a summary of the i18n layer](docs/screenshots/02-kontrol-paneli.png)
+
+### Login screen
+
+Demo accounts fill in with one click. Login attempts are rate limited; after repeated failures the account is temporarily locked. A language picked on the login screen is **carried over** to the account after signing in.
+
+![Login screen: demo accounts fill in with one click](docs/screenshots/01-giris.png)
+
+### Dark theme
+
+The theme is stored in the user account, not the browser. Table cell contrast is measured in dark mode too (14.5:1).
+
+![Dark theme](docs/screenshots/06-koyu-tema.png)
+
+### Mobile view
+
+At 390px the sidebar turns into bottom navigation. The page body never scrolls horizontally; wide tables scroll only inside their own container.
+
+<img src="docs/screenshots/07-mobil.png" alt="Mobile view at 390px" width="360">
 
 ---
 
@@ -290,6 +315,7 @@ Instead, `Translator` checks for the extension on every localisation call and fa
 - Light / dark theme, stored on the account
 - Server-side pagination and search
 - Bottom navigation on mobile, no horizontal scrolling
+- Live filtering on the users page (works without JS too)
 - Zero dependencies: no Composer, no npm, no CDN
 
 </td></tr>
@@ -512,8 +538,8 @@ Why the column is an `ENUM`, and the trade-off involved, is explained in [Databa
 **1 · Get the files**
 
 ```bash
-git clone https://github.com/CilginYazilim/PHP-MySQL-Coklu-Dil-i18n-Cogul-Kurallari-RTL-Panel.git
-cd PHP-MySQL-Coklu-Dil-i18n-Cogul-Kurallari-RTL-Panel
+git clone https://github.com/CilginYazilim/multi-language-system.git
+cd multi-language-system
 ```
 
 **2 · Import the database**
@@ -652,11 +678,11 @@ multi-language-system/
 │   ├── dashboard/index.php
 │   ├── i18n/index.php         ★ Language examples page
 │   ├── users/index.php
-│   └── errors/                403 · 404 · 500
+│   └── errors/                404 · 500
 │
 ├── assets/
 │   ├── css/  cilginyazilim.css (brand) · admin.css · feature.css · bootstrap.min.css
-│   └── js/   app.js · lang.js · login.js · jquery · bootstrap
+│   └── js/   app.js · lang.js · login.js · users.js · jquery · bootstrap
 │
 ├── config/config.php          Single source of settings
 ├── routes/web.php             Route definitions
@@ -835,7 +861,7 @@ This is deliberate. An empty string would make a missing translation **disappear
 
 ## Contributing
 
-Open an [issue](https://github.com/CilginYazilim/PHP-MySQL-Coklu-Dil-i18n-Cogul-Kurallari-RTL-Panel/issues) for bug reports and suggestions. New language translations are very welcome — keep key parity and use that language's own categories in the plural patterns.
+Open an [issue](https://github.com/CilginYazilim/multi-language-system/issues) for bug reports and suggestions. New language translations are very welcome — keep key parity and use that language's own categories in the plural patterns.
 
 ## License
 

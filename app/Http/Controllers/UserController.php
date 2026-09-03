@@ -54,6 +54,10 @@ final class UserController extends Controller
             'search'    => $search,
             'status'    => $status,
             'perPage'   => $perPage,
+
+            /* Filtreleri "Uygula"ya basmadan çalıştıran kod.
+             * Sayfaya özel; her sayfada yüklenmez. */
+            'scripts'   => ['users.js'],
         ]);
     }
 }
